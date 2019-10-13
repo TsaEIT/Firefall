@@ -13,7 +13,7 @@ game.PlayerEntity = me.Entity.extend({
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
         this.alwaysUpdate = true;
         
-        this.renderable.addAnimation("idle",  [1]);
+        this.renderable.addAnimation("idle",  [0]);
         
         this.renderable.setCurrentAnimation("idle");
     },
