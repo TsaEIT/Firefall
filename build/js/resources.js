@@ -75,6 +75,11 @@ game.resources = [
         "src": "data/img/pinchers.png"
     },
     {
+        "name": "player",
+        "type": "image",
+        "src": "data/img/sprites/player.png"
+    },
+    {
         "name": "level1",
         "type": "tmx",
         "src": "data/map/level1.tmx"
