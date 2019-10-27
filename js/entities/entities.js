@@ -12,10 +12,8 @@ game.PlayerEntity = me.Entity.extend({
         this.body.setVelocity(2, 2);
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
         this.alwaysUpdate = true;
-		
-		this.animationspeed(200)
         
-        this.renderable.addAnimation("idle",  [0, 1, 2, 3, 4]);
+        this.renderable.addAnimation("idle",  [0, 1, 2, 3, 4], 200);
         
         this.renderable.setCurrentAnimation("idle");
     },
