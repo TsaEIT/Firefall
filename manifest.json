@@ -1,10 +1,10 @@
 {
-  "short_name": "melonJS Boilerplate",
-  "name": "My melonJS Boilerplate Game",
+  "short_name": "Firefall",
+  "name": "Firefall",
   "orientation": "landscape",
   "developer": {
-    "name": "melonjs",
-    "url": "http://www.melonjs.org"
+    "name": "TsaEIT",
+    "url": "https://github.com/TsaEIT"
   },
   "start_url": "./index.html",
   "display": "fullscreen",

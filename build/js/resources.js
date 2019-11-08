@@ -10,9 +10,9 @@ game.resources = [
         "src": "data/img/map/background.png"
     },
     {
-        "name": "background2",
+        "name": "background-image",
         "type": "image",
-        "src": "data/img/map/background2.png"
+        "src": "data/img/background-image.png"
     },
     {
         "name": "level1_tilet_img",
