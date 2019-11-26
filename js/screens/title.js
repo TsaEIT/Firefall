@@ -12,6 +12,8 @@ game.TitleScreen = me.ScreenObject.extend({
 		
 		me.game.world.addChild(backgroundImage, 1);
 		
+		
+		
 		/*
 		me.game.world.addChild(new (me.Renderable.extend ({
 			// constructor
@@ -48,6 +50,10 @@ game.TitleScreen = me.ScreenObject.extend({
 			}
 		})), 2);
 		*/
+		
+		this.HUD = new game.HUD.Container();
+        me.game.world.addChild(this.HUD);
+		
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
 			if (action === "enter") {
@@ -55,6 +61,7 @@ game.TitleScreen = me.ScreenObject.extend({
 				// this will unlock audio on mobile devices
 				// me.audio.play("cling");
 				me.state.change(me.state.PLAY);
+				me.levelDirector.loadLevel('level1')
 			}
 		});
     },
@@ -65,6 +72,30 @@ game.TitleScreen = me.ScreenObject.extend({
     onDestroyEvent: function() {
 		me.input.unbindKey(me.input.KEY.ENTER);
 		me.event.unsubscribe(this.handler);
-		me.levelDirector.loadLevel('level1')
+		me.game.world.removeChild(this.HUD);
     }
+});
+
+var playButton = me.GUI_Object.extend(
+{
+   init:function (x, y)
+   {
+      var settings = {}
+      settings.image = "play_button";
+      settings.framewidth = 100;
+      settings.frameheight = 50;
+      // super constructor
+      this._super(me.GUI_Object, "init", [x, y, settings]);
+      // define the object z order
+      this.pos.z = 4;
+   },
+
+   // output something in the console
+   // when the object is clicked
+   onClick:function (event)
+   {
+      console.log("clicked!");
+      // don't propagate the event
+      return false;
+   }
 });

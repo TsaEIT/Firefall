@@ -64,3 +64,51 @@ game.HUD.ScoreItem = me.Renderable.extend({
     }
 
 });
+
+game.playButton.ScoreItem = me.Renderable.extend({
+    /**
+     * constructor
+     */
+    init: function(x, y) {
+
+        // call the parent constructor
+        // (size does not matter here)
+		var settings = {};
+		
+		settings.image = "play_button";
+		settings.framewidth = settings["framewidth"];
+		settings.frameheight = settings["framehight"];
+		
+        this._super(me.Renderable, 'init', [x, y, 72, 84]);
+		
+		this.pos.z = 4;
+    },
+
+    /**
+     * update function
+     */
+    update : function () {
+        // we don't do anything fancy here, so just
+        // return true if the score has been updated
+        if (this.score !== game.data.score) {
+            this.score = game.data.score;
+            return true;
+        }
+        return false;
+    },
+	
+	onClick:function (event)
+	{
+      console.log("play");
+	  me.levelDirector.loadLevel('level1');
+      return false;
+	}
+
+    /**
+     * draw the score
+     */
+    draw : function (context) {
+        // draw it baby !
+    }
+
+});
