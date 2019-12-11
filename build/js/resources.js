@@ -1,5 +1,20 @@
 game.resources = [
     {
+        "name": "Music Project",
+        "type": "audio",
+        "src": "data/sfx/"
+    },
+    {
+        "name": "background-image",
+        "type": "image",
+        "src": "data/img/background-image.png"
+    },
+    {
+        "name": "play_button",
+        "type": "image",
+        "src": "data/img/gui/play_button.png"
+    },
+    {
         "name": "1 (2)",
         "type": "image",
         "src": "data/img/map/1 (2).png"
@@ -8,11 +23,6 @@ game.resources = [
         "name": "background",
         "type": "image",
         "src": "data/img/map/background.png"
-    },
-    {
-        "name": "background-image",
-        "type": "image",
-        "src": "data/img/background-image.png"
     },
     {
         "name": "level1_tilet_img",
@@ -75,14 +85,44 @@ game.resources = [
         "src": "data/img/pinchers.png"
     },
     {
+        "name": "pixil-frame-0 (12)",
+        "type": "image",
+        "src": "data/img/sprites/pixil-frame-0 (12).png"
+    },
+    {
+        "name": "pixil-frame-0 (13)",
+        "type": "image",
+        "src": "data/img/sprites/pixil-frame-0 (13).png"
+    },
+    {
+        "name": "pixil-frame-0 (14)",
+        "type": "image",
+        "src": "data/img/sprites/pixil-frame-0 (14).png"
+    },
+    {
+        "name": "pixil-frame-0",
+        "type": "image",
+        "src": "data/img/sprites/pixil-frame-0.png"
+    },
+    {
         "name": "player",
         "type": "image",
         "src": "data/img/sprites/player.png"
     },
     {
+        "name": "ugly_color",
+        "type": "image",
+        "src": "data/img/ugly_color.png"
+    },
+    {
         "name": "level1",
         "type": "tmx",
         "src": "data/map/level1.tmx"
+    },
+    {
+        "name": "level2_test",
+        "type": "tmx",
+        "src": "data/map/level2_test.tmx"
     },
     {
         "name": "level1_tileset",

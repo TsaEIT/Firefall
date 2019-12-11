@@ -65,7 +65,7 @@ game.HUD.ScoreItem = me.Renderable.extend({
 
 });
 
-game.playButton.ScoreItem = me.Renderable.extend({
+game.HUD.playButton = me.Renderable.extend({
     /**
      * constructor
      */
@@ -102,7 +102,7 @@ game.playButton.ScoreItem = me.Renderable.extend({
       console.log("play");
 	  me.levelDirector.loadLevel('level1');
       return false;
-	}
+	},
 
     /**
      * draw the score
