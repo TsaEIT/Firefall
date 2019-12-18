@@ -12,58 +12,24 @@ game.TitleScreen = me.ScreenObject.extend({
 		
 		me.game.world.addChild(backgroundImage, 1);
 		
-		
-		
-		/*
-		me.game.world.addChild(new (me.Renderable.extend ({
-			// constructor
-			init : function () {
-				this._super(me.Renderable, 'init', [0, 0, me.game.viewport.width, me.game.viewport.height]);
-		
-				// font for the scrolling text
-				this.font = new me.BitmapFont(me.loader.getBinary('font'), me.loader.getImage('font'), 0.1);
-		
-				// a tween to animate the arrow
-				this.scrollertween = new me.Tween(this).to({scrollerpos: -2200 }, 10000).onComplete(this.scrollover.bind(this)).start();
-		
-				this.scroller = "";
-				this.scrollerpos = 600;
-			},
-		
-			// some callback for the tween objects
-			scrollover : function () {
-				// reset to default value
-				this.scrollerpos = 640;
-				this.scrollertween.to({scrollerpos: -2200 }, 10000).onComplete(this.scrollover.bind(this)).start();
-			},
-		
-			update : function (dt) {
-				return true;
-			},
-		
-			draw : function (renderer) {
-				
-			},
-			onDestroyEvent : function () {
-				//just in case
-				this.scrollertween.stop();
-			}
-		})), 2);
-		*/
-		
 		this.HUD = new game.HUD.Container();
         me.game.world.addChild(this.HUD);
 		
+        me.game.world.addChild(new basic_button(120, 110, 'play_button', function() {
+            me.state.change(me.state.PLAY);
+			me.levelDirector.loadLevel('level1');
+        }));
+        
+        /*
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
 			if (action === "enter") {
-				// play something on tap / enter
-				// this will unlock audio on mobile devices
 				// me.audio.play("cling");
 				me.state.change(me.state.PLAY);
-				me.levelDirector.loadLevel('level1')
+				me.levelDirector.loadLevel('level1');
 			}
 		});
+        */
     },
 
     /**
@@ -71,31 +37,32 @@ game.TitleScreen = me.ScreenObject.extend({
      */
     onDestroyEvent: function() {
 		me.input.unbindKey(me.input.KEY.ENTER);
-		me.event.unsubscribe(this.handler);
+		// me.event.unsubscribe(this.handler); Don't think this is important
 		me.game.world.removeChild(this.HUD);
     }
 });
 
-var playButton = me.GUI_Object.extend(
+var basic_button = me.GUI_Object.extend(
 {
-   init:function (x, y)
+   init:function (x, y, image, callback)
    {
       var settings = {}
-      settings.image = "play_button";
+      settings.image = image;
       settings.framewidth = 100;
       settings.frameheight = 50;
       // super constructor
       this._super(me.GUI_Object, "init", [x, y, settings]);
       // define the object z order
       this.pos.z = 4;
+      
+      this.callback = callback;
    },
 
    // output something in the console
    // when the object is clicked
    onClick:function (event)
    {
-      console.log("clicked!");
-      // don't propagate the event
+      this.callback();
       return false;
    }
 });

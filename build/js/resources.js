@@ -1,6 +1,6 @@
 game.resources = [
     {
-        "name": "Music Project",
+        "name": "FinalFight",
         "type": "audio",
         "src": "data/sfx/"
     },
@@ -28,6 +28,11 @@ game.resources = [
         "name": "level1_tilet_img",
         "type": "image",
         "src": "data/img/map/level1_tilet_img.png"
+    },
+    {
+        "name": "level2_tilet_img",
+        "type": "image",
+        "src": "data/img/map/level2_tilet_img.png"
     },
     {
         "name": "monsters",
@@ -120,13 +125,18 @@ game.resources = [
         "src": "data/map/level1.tmx"
     },
     {
-        "name": "level2_test",
+        "name": "level2",
         "type": "tmx",
-        "src": "data/map/level2_test.tmx"
+        "src": "data/map/level2.tmx"
     },
     {
         "name": "level1_tileset",
         "type": "tsx",
         "src": "data/map/level1_tileset.tsx"
+    },
+    {
+        "name": "level2_tileset",
+        "type": "tsx",
+        "src": "data/map/level2_tileset.tsx"
     }
 ];

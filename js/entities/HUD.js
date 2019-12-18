@@ -70,16 +70,13 @@ game.HUD.playButton = me.Renderable.extend({
      * constructor
      */
     init: function(x, y) {
-
-        // call the parent constructor
-        // (size does not matter here)
 		var settings = {};
 		
-		settings.image = "play_button";
-		settings.framewidth = settings["framewidth"];
-		settings.frameheight = settings["framehight"];
+		settings.image = "ugly_color.png";
+		// settings.framewidth = settings["framewidth"];
+		// settings.frameheight = settings["framehight"];
 		
-        this._super(me.Renderable, 'init', [x, y, 72, 84]);
+        this._super(me.Renderable, 'init', [x, y, settings]);
 		
 		this.pos.z = 4;
     },
