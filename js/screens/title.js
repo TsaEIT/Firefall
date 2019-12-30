@@ -4,7 +4,7 @@ game.TitleScreen = me.ScreenObject.extend({
      */
     onResetEvent: function() {
         var backgroundImage = new me.Sprite(0, 0, {
-            image: me.loader.getImage('background-image'),
+            image: me.loader.getImage('title_screen'),
         });
 		
 		backgroundImage.anchorPoint.set(0, 0);
@@ -15,21 +15,14 @@ game.TitleScreen = me.ScreenObject.extend({
 		this.HUD = new game.HUD.Container();
         me.game.world.addChild(this.HUD);
 		
-        me.game.world.addChild(new basic_button(120, 110, 'play_button', function() {
+        me.game.world.addChild(new basic_button(124.5, 362.5, 'play_button', function() {
             me.state.change(me.state.PLAY);
 			me.levelDirector.loadLevel('level1');
         }));
         
-        /*
-		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
-		this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
-			if (action === "enter") {
-				// me.audio.play("cling");
-				me.state.change(me.state.PLAY);
-				me.levelDirector.loadLevel('level1');
-			}
-		});
-        */
+        me.game.world.addChild(new basic_button(343.5, 362.5, 'info_button', function() {
+            console.log('info')
+        }));
     },
 
     /**
@@ -48,8 +41,8 @@ var basic_button = me.GUI_Object.extend(
    {
       var settings = {}
       settings.image = image;
-      settings.framewidth = 100;
-      settings.frameheight = 50;
+      settings.framewidth = 165;
+      settings.frameheight = 33;
       // super constructor
       this._super(me.GUI_Object, "init", [x, y, settings]);
       // define the object z order

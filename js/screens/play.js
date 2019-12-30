@@ -3,9 +3,7 @@ game.PlayScreen = me.ScreenObject.extend({
      *  action to perform on state change
      */
     onResetEvent: function() {
-		me.levelDirector.loadLevel('level1')
-        
-		// reset the score
+        // reset the score
         game.data.score = 0;
 
         // Add our HUD to the game world, add it last so that this is on top of the rest.

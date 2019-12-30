@@ -10,9 +10,19 @@ game.resources = [
         "src": "data/img/background-image.png"
     },
     {
+        "name": "info_button",
+        "type": "image",
+        "src": "data/img/gui/info_button.png"
+    },
+    {
         "name": "play_button",
         "type": "image",
         "src": "data/img/gui/play_button.png"
+    },
+    {
+        "name": "title_screen",
+        "type": "image",
+        "src": "data/img/gui/title_screen.png"
     },
     {
         "name": "1 (2)",
@@ -25,14 +35,39 @@ game.resources = [
         "src": "data/img/map/background.png"
     },
     {
+        "name": "Banner",
+        "type": "image",
+        "src": "data/img/map/Banner.png"
+    },
+    {
+        "name": "Broken Column",
+        "type": "image",
+        "src": "data/img/map/Broken Column.png"
+    },
+    {
+        "name": "Legionnaire Statue",
+        "type": "image",
+        "src": "data/img/map/Legionnaire Statue.png"
+    },
+    {
         "name": "level1_tilet_img",
         "type": "image",
         "src": "data/img/map/level1_tilet_img.png"
     },
     {
+        "name": "level2_background_image",
+        "type": "image",
+        "src": "data/img/map/level2_background_image.png"
+    },
+    {
         "name": "level2_tilet_img",
         "type": "image",
         "src": "data/img/map/level2_tilet_img.png"
+    },
+    {
+        "name": "More Banners",
+        "type": "image",
+        "src": "data/img/map/More Banners.png"
     },
     {
         "name": "monsters",
@@ -133,6 +168,11 @@ game.resources = [
         "name": "level1_tileset",
         "type": "tsx",
         "src": "data/map/level1_tileset.tsx"
+    },
+    {
+        "name": "level2_background_image",
+        "type": "tsx",
+        "src": "data/map/level2_background_image.tsx"
     },
     {
         "name": "level2_tileset",

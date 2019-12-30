@@ -23,8 +23,6 @@ var game = {
         // set and load all resources.
         // (this will also automatically switch to the loading screen)
         me.loader.preload(game.resources, this.loaded.bind(this));
-        
-         me.sys.gravity = 0; // Change On Platformer Levels
     },
 
     // Run on game resources loaded.
@@ -34,6 +32,7 @@ var game = {
 
         // add our player entity in the entity pool
         me.pool.register("mainPlayer", game.PlayerEntity);
+        me.pool.register("lavaEntity", game.LavaEntity);
         
         me.input.bindKey(me.input.KEY.UP,  "up");
         me.input.bindKey(me.input.KEY.DOWN, "down");
