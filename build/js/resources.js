@@ -105,6 +105,11 @@ game.resources = [
         "src": "data/img/pinchers.png"
     },
     {
+        "name": "elevator",
+        "type": "image",
+        "src": "data/img/sprites/elevator.png"
+    },
+    {
         "name": "pixil-frame-0 (12)",
         "type": "image",
         "src": "data/img/sprites/pixil-frame-0 (12).png"

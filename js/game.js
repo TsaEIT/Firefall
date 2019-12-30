@@ -33,6 +33,7 @@ var game = {
         // add our player entity in the entity pool
         me.pool.register("mainPlayer", game.PlayerEntity);
         me.pool.register("lavaEntity", game.LavaEntity);
+        me.pool.register("elevatorEntity", game.ElevatorEntity);
         
         me.input.bindKey(me.input.KEY.UP,  "up");
         me.input.bindKey(me.input.KEY.DOWN, "down");
