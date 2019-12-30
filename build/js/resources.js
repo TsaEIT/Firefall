@@ -35,21 +35,6 @@ game.resources = [
         "src": "data/img/map/background.png"
     },
     {
-        "name": "Banner",
-        "type": "image",
-        "src": "data/img/map/Banner.png"
-    },
-    {
-        "name": "Broken Column",
-        "type": "image",
-        "src": "data/img/map/Broken Column.png"
-    },
-    {
-        "name": "Legionnaire Statue",
-        "type": "image",
-        "src": "data/img/map/Legionnaire Statue.png"
-    },
-    {
         "name": "level1_tilet_img",
         "type": "image",
         "src": "data/img/map/level1_tilet_img.png"
@@ -63,11 +48,6 @@ game.resources = [
         "name": "level2_tilet_img",
         "type": "image",
         "src": "data/img/map/level2_tilet_img.png"
-    },
-    {
-        "name": "More Banners",
-        "type": "image",
-        "src": "data/img/map/More Banners.png"
     },
     {
         "name": "monsters",
