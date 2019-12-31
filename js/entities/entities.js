@@ -20,6 +20,11 @@ game.PlayerEntity = me.Entity.extend({
         
         this.renderable.addAnimation("idle",  [0, 1, 2, 3, 4], 200);
         
+        if (me.levelDirector.getCurrentLevel().name == "tobecontinued") {
+            console.log('Playing MUSIC')
+            me.audio.play("FinalFight", true);
+        }
+        
         var platformer_levels = ['level2'];
         
         if (platformer_levels.includes(me.levelDirector.getCurrentLevel().name)) {
@@ -143,9 +148,6 @@ game.ElevatorEntity = me.Entity.extend({
         this.minY = 0;
         this.maxY = 0;
     }
-    
-    
-    
     this.movement_speed = 1.5;
     
     this.alwaysUpdate = true;

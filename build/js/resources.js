@@ -50,6 +50,11 @@ game.resources = [
         "src": "data/img/map/level2_tilet_img.png"
     },
     {
+        "name": "tobecontinued",
+        "type": "image",
+        "src": "data/img/map/tobecontinued.png"
+    },
+    {
         "name": "monsters",
         "type": "image",
         "src": "data/img/monsters.png"
@@ -150,6 +155,11 @@ game.resources = [
         "src": "data/map/level2.tmx"
     },
     {
+        "name": "tobecontinued",
+        "type": "tmx",
+        "src": "data/map/tobecontinued.tmx"
+    },
+    {
         "name": "level1_tileset",
         "type": "tsx",
         "src": "data/map/level1_tileset.tsx"
@@ -163,5 +173,10 @@ game.resources = [
         "name": "level2_tileset",
         "type": "tsx",
         "src": "data/map/level2_tileset.tsx"
+    },
+    {
+        "name": "tobecontinued",
+        "type": "tsx",
+        "src": "data/map/tobecontinued.tsx"
     }
 ];

@@ -18,7 +18,7 @@ var game = {
         }
 
         // Initialize the audio.
-        me.audio.init("mp3,ogg");
+        me.audio.init("mp3, ogg");
 
         // set and load all resources.
         // (this will also automatically switch to the loading screen)
