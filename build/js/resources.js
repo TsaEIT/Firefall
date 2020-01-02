@@ -15,6 +15,11 @@ game.resources = [
         "src": "data/img/gui/info_button.png"
     },
     {
+        "name": "info_over",
+        "type": "image",
+        "src": "data/img/gui/info_over.png"
+    },
+    {
         "name": "play_button",
         "type": "image",
         "src": "data/img/gui/play_button.png"
@@ -113,6 +118,16 @@ game.resources = [
         "name": "elevator",
         "type": "image",
         "src": "data/img/sprites/elevator.png"
+    },
+    {
+        "name": "fireball",
+        "type": "image",
+        "src": "data/img/sprites/fireball.png"
+    },
+    {
+        "name": "goo",
+        "type": "image",
+        "src": "data/img/sprites/goo.png"
     },
     {
         "name": "pixil-frame-0 (12)",

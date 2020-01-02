@@ -29,16 +29,21 @@ var game = {
     "loaded" : function () {
         me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
+        
+        me.input.registerPointerEvent("pointerdown", this, function(e) {console.log("click")});
 
         // add our player entity in the entity pool
         me.pool.register("mainPlayer", game.PlayerEntity);
         me.pool.register("lavaEntity", game.LavaEntity);
         me.pool.register("elevatorEntity", game.ElevatorEntity);
+        me.pool.register("fireball", game.Fireball);
         
         me.input.bindKey(me.input.KEY.UP,  "up");
         me.input.bindKey(me.input.KEY.DOWN, "down");
         me.input.bindKey(me.input.KEY.LEFT,  "left");
         me.input.bindKey(me.input.KEY.RIGHT, "right");
+        
+        me.input.bindKey(me.input.KEY.F, "fireball");
         
         me.input.bindKey(me.input.KEY.W,  "up");
         me.input.bindKey(me.input.KEY.S, "down");

@@ -1,6 +1,10 @@
 /**
  * Player Entity
  */
+ 
+var fireball_cooldown = false;
+var fireball_cooldown_period = 500;
+
 game.PlayerEntity = me.Entity.extend({
 
     /**
@@ -9,8 +13,9 @@ game.PlayerEntity = me.Entity.extend({
     init:function (x, y, settings) {
         // call the constructor
         this._super(me.Entity, 'init', [x, y , settings]);
-        
         this.name = "player";
+        
+        this.current_settings = settings;
         
         this.body.setVelocity(2.5, 2.5);
         this.body.setFriction(0.5, 0.5);
@@ -37,6 +42,7 @@ game.PlayerEntity = me.Entity.extend({
         
         this.on_platform = false;
         
+        var fireball_cooldown = false;
         
         this.renderable.setCurrentAnimation("idle");
     },
@@ -46,6 +52,20 @@ game.PlayerEntity = me.Entity.extend({
      */
     update : function (dt) {
         var moving = false;
+        
+        if (me.input.isKeyPressed('fireball')) {
+            if (!fireball_cooldown) {
+                var newFireballX = (this.pos.x + (this.current_settings.width/2));
+                var newFireballY =(this.pos.y + (this.current_settings.height/2));
+                
+                var fireball = me.pool.pull('fireball', newFireballX, newFireballY);
+                me.game.world﻿.addChild(fireball);﻿﻿
+                
+                fireball_cooldown = true;
+                setTimeout(function() {fireball_cooldown = false}, fireball_cooldown_period);
+            }
+        }
+        
         if (me.input.isKeyPressed('left')) {
             moving = true;
             // flip the sprite on horizontal axis
@@ -105,6 +125,11 @@ game.PlayerEntity = me.Entity.extend({
      */
     onCollision : function (response, other) {
         var dangerous_entities = ["LAVA"];
+        var trans_entities = ["FIREBALL"];
+        
+        if (trans_entities.includes(other.type)) {
+            return false;
+        }
         
         if (dangerous_entities.includes(other.type)) { // response.b.body.collisionType == me.collision.types.ENEMY_OBJECT
           me.levelDirector.reloadLevel();
@@ -120,6 +145,9 @@ game.LavaEntity = me.Entity.extend({
   init: function (x, y, settings) {
     // call the parent constructor
     this._super(me.Entity, 'init', [x, y , settings]);
+    
+    // this.renderable.addAnimation("norm",  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 100);
+    // this.renderable.setCurrentAnimation("norm");
   },
 
   // this function is called by the engine, when
@@ -157,9 +185,6 @@ game.ElevatorEntity = me.Entity.extend({
   
   
   update: function(dt) {
-        if (this.direction == "right" || this.direction == "left") {
-            console.log(this.pos);
-        }
       
         if (this.direction == "up") {
             this.body.vel.y = -this.movement_speed;
@@ -196,6 +221,68 @@ game.ElevatorEntity = me.Entity.extend({
       if (other.name == "player") {
           other.on_platform = true;
       }
+      return false;
+  }
+});
+
+game.Fireball = me.Entity.extend({
+  // extending the init function is not mandatory
+  // unless you need to add some extra initialization
+  init: function (x, y, settings) {
+    settings = settings || {
+        image: 'fireball',
+        height: 17,
+        width: 11
+    };
+    
+    x -= settings.width/2;
+    y -= settings.height/2;
+    
+    // call the parent constructor
+    this._super(me.Entity, 'init', [x, y, settings]);
+    
+    this.renderable.addAnimation("burn_everything",  [0, 1], 50);
+    
+    this.target = [me.input.pointer.gameWorldX, me.input.pointer.gameWorldY];
+    this.velocity = 3;
+    
+    this.dist_to_target = Math.sqrt(((this.target[0] - x) * (this.target[0] - x)) + ((this.target[1] - y) * (this.target[1] - y)));
+    
+    this.deltaX = ((this.target[0] - x) * this.velocity) / this.dist_to_target;
+    this.deltaY = ((this.target[1] - y) * this.velocity) / this.dist_to_target;
+    
+    console.log(Math.atan2( this.target[0] - x, this.target[1] - y))
+    this﻿.renderable.currentTransform﻿﻿.rotate﻿( ( Math.atan2( this.target[1] - y, this.target[0] - x) ) - Math.PI/2);
+    
+    this.type = "FIREBALL";
+    
+    this.alwaysUpdate = true;
+    
+    this.body.gravity = {x: 0.0, y: 0.0};
+    
+    this.renderable.setCurrentAnimation("burn_everything");
+  },
+  
+  update: function(dt) {
+        // var mainPlayer = me.game.world.children.find(function (e) {return e.name == 'mainPlayer'});
+      
+        this.pos._x += this.deltaX;
+        this.pos._y += this.deltaY;
+      
+        this.body.update(dt);
+        
+        me.collision.check(this);
+
+        return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
+  },
+
+  // this function is called by the engine, when
+  // an object is touched by something (here collected)
+  onCollision : function (response, other) {
+      if (other.name != "player") {
+          me.game.world.removeChild(this, false);
+      }
+      
       return false;
   }
 });
