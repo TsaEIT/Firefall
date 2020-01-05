@@ -5,6 +5,11 @@ game.resources = [
         "src": "data/sfx/"
     },
     {
+        "name": "Theme",
+        "type": "audio",
+        "src": "data/sfx/"
+    },
+    {
         "name": "background-image",
         "type": "image",
         "src": "data/img/background-image.png"
