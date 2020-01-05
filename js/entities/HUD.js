@@ -19,9 +19,6 @@ game.HUD.Container = me.Container.extend({
 
         // give a name
         this.name = "HUD";
-
-        // add our child score object at the top left corner
-        this.addChild(new game.HUD.ScoreItem(5, 5));
     }
 });
 
@@ -55,51 +52,6 @@ game.HUD.ScoreItem = me.Renderable.extend({
         }
         return false;
     },
-
-    /**
-     * draw the score
-     */
-    draw : function (context) {
-        // draw it baby !
-    }
-
-});
-
-game.HUD.playButton = me.Renderable.extend({
-    /**
-     * constructor
-     */
-    init: function(x, y) {
-		var settings = {};
-		
-		settings.image = "ugly_color.png";
-		// settings.framewidth = settings["framewidth"];
-		// settings.frameheight = settings["framehight"];
-		
-        this._super(me.Renderable, 'init', [x, y, settings]);
-		
-		this.pos.z = 4;
-    },
-
-    /**
-     * update function
-     */
-    update : function () {
-        // we don't do anything fancy here, so just
-        // return true if the score has been updated
-        if (this.score !== game.data.score) {
-            this.score = game.data.score;
-            return true;
-        }
-        return false;
-    },
-	
-	onClick:function (event)
-	{
-      console.log("play");
-	  me.levelDirector.loadLevel('level1');
-      return false;
-	},
 
     /**
      * draw the score

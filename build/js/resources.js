@@ -10,6 +10,11 @@ game.resources = [
         "src": "data/img/background-image.png"
     },
     {
+        "name": "favicon",
+        "type": "image",
+        "src": "data/img/gui/favicon.png"
+    },
+    {
         "name": "info_button",
         "type": "image",
         "src": "data/img/gui/info_button.png"
@@ -18,6 +23,11 @@ game.resources = [
         "name": "info_over",
         "type": "image",
         "src": "data/img/gui/info_over.png"
+    },
+    {
+        "name": "OuterShadow",
+        "type": "image",
+        "src": "data/img/gui/OuterShadow.png"
     },
     {
         "name": "play_button",
@@ -38,6 +48,11 @@ game.resources = [
         "name": "background",
         "type": "image",
         "src": "data/img/map/background.png"
+    },
+    {
+        "name": "BlankBackground",
+        "type": "image",
+        "src": "data/img/map/BlankBackground.png"
     },
     {
         "name": "level1_tilet_img",
