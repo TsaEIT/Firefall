@@ -5,7 +5,6 @@ game.resources = [
         "src": "data/sfx/"
     },
     {
-    {
         "name": "Theme",
         "type": "audio",
         "src": "data/sfx/"
