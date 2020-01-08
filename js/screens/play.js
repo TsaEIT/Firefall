@@ -15,7 +15,7 @@ game.PlayScreen = me.ScreenObject.extend({
         
         console.log('test')
         
-        if (me.levelDirector.getCurrentLevel().name == "level1") this.HUD.addChild(shadow);
+        this.HUD.addChild(shadow);
     },
 
     /**

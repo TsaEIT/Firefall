@@ -59,7 +59,7 @@ game.PlayerEntity = me.Entity.extend({
                 var newFireballY =(this.pos.y + (this.current_settings.height/2));
                 
                 var fireball = me.pool.pull('fireball', newFireballX, newFireballY);
-                me.game.world﻿.addChild(fireball);﻿﻿
+                me.game.world?.addChild(fireball);??
                 
                 fireball_cooldown = true;
                 setTimeout(function() {fireball_cooldown = false}, fireball_cooldown_period);
@@ -251,7 +251,7 @@ game.Fireball = me.Entity.extend({
     this.deltaX = ((this.target[0] - x) * this.velocity) / this.dist_to_target;
     this.deltaY = ((this.target[1] - y) * this.velocity) / this.dist_to_target;
     
-    this﻿.renderable.currentTransform﻿﻿.rotate﻿( ( Math.atan2( this.target[1] - y, this.target[0] - x) ) - Math.PI/2);
+    this.renderable.currentTransform.rotate( ( Math.atan2( this.target[1] - y, this.target[0] - x) ) - Math.PI/2);
     
     this.type = "FIREBALL";
     
