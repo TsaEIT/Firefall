@@ -251,7 +251,6 @@ game.Fireball = me.Entity.extend({
     this.deltaX = ((this.target[0] - x) * this.velocity) / this.dist_to_target;
     this.deltaY = ((this.target[1] - y) * this.velocity) / this.dist_to_target;
     
-    console.log(Math.atan2( this.target[0] - x, this.target[1] - y))
     this﻿.renderable.currentTransform﻿﻿.rotate﻿( ( Math.atan2( this.target[1] - y, this.target[0] - x) ) - Math.PI/2);
     
     this.type = "FIREBALL";
@@ -283,6 +282,101 @@ game.Fireball = me.Entity.extend({
           me.game.world.removeChild(this, false);
       }
       
+      return false;
+  }
+});
+
+game.skelespiderEntity = me.Entity.extend({
+  // extending the init function is not mandatory
+  // unless you need to add some extra initialization
+  init: function (x, y, settings) {
+    
+    
+    // call the parent constructor
+    this._super(me.Entity, 'init', [x, y , settings]);
+    
+    // set the default horizontal & vertical speed (accel vector)
+    this.body.setVelocity(1, 1);    
+    this.renderable.addAnimation("stand",  [0]);
+    this.renderable.setCurrentAnimation("stand");
+  },
+  update : function (dt) {
+     var player = me.game.world.children.find(function (e) {return e.name == 'player'});
+     
+     if (player.alive) {
+         if (this.distanceTo(player) <= 256) {
+             var angle = this.angleTo(player)
+             this.body.vel.y += Math.sin(angle) * this.body.accel.y * me.timer.tick;
+             this.body.vel.x += Math.cos(angle) * this.body.accel.x * me.timer.tick;
+             this.body.update(dt);
+         } else {
+             this.body.vel.y = this.body.vel.x = 0;
+             this.body.update(dt)
+         }
+     }
+     
+     // handle collisions against other shapes
+     me.collision.check(this);
+     
+     // return true if we moved or if the renderable was updated
+     return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);     
+  },
+  // this function is called by the engine, when
+  // an object is touched by something (here collected)
+  onCollision : function (response, other) {
+      if (response.b.body.collisionType == me.collision.types.WORLD_SHAPE) {
+          return true;
+      }
+      return false;
+  }
+});
+
+game.pincersEntity = me.Entity.extend({
+  // extending the init function is not mandatory
+  // unless you need to add some extra initialization
+  init: function (x, y, settings) {
+    
+    
+    // call the parent constructor
+    this._super(me.Entity, 'init', [x, y , settings]);
+    
+    // set the default horizontal & vertical speed (accel vector)
+    this.body.setVelocity(1, 1);    
+    this.renderable.addAnimation("normal_animation",  [0, 1, 2, 3, 4, 5]);
+    this.renderable.setCurrentAnimation("normal_animation");
+  },
+  update : function (dt) {
+     var player = me.game.world.children.find(function (e) {return e.name == 'player'});
+     
+     if (player.alive) {
+         if (this.distanceTo(player) <= 256) {
+             var angle = this.angleTo(player)
+             this.body.vel.y += Math.sin(angle) * this.body.accel.y * me.timer.tick; // TODO: Vector Math
+             this.body.vel.x += Math.cos(angle) * this.body.accel.x * me.timer.tick;
+             this.body.update(dt);
+         } else {
+             this.body.vel.y = this.body.vel.x = 0;
+             this.body.update(dt)
+         }
+     }
+     
+     // handle collisions against other shapes
+     me.collision.check(this);
+     
+     // return true if we moved or if the renderable was updated
+     return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);     
+  },
+  // this function is called by the engine, when
+  // an object is touched by something (here collected)
+  onCollision : function (response, other) {
+      if (response.b.body.collisionType == me.collision.types.WORLD_SHAPE) {
+          return true;
+      }
+      
+      if (other.type == 'FIREBALL') {
+            this.body.setCollisionMask(me.collision.types.NO_OBJECT);
+            me.game.world.removeChild(this);
+      }
       return false;
   }
 });

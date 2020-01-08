@@ -38,6 +38,9 @@ var game = {
         me.pool.register("elevatorEntity", game.ElevatorEntity);
         me.pool.register("fireball", game.Fireball);
         
+        me.pool.register("skelespider", game.skelespiderEntity);
+        me.pool.register("pincers", game.pincersEntity);
+        
         me.input.bindKey(me.input.KEY.UP,  "up");
         me.input.bindKey(me.input.KEY.DOWN, "down");
         me.input.bindKey(me.input.KEY.LEFT,  "left");
