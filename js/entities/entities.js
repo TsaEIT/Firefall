@@ -59,7 +59,7 @@ game.PlayerEntity = me.Entity.extend({
                 var newFireballY =(this.pos.y + (this.current_settings.height/2));
                 
                 var fireball = me.pool.pull('fireball', newFireballX, newFireballY);
-                me.game.world?.addChild(fireball);
+                me.game.world.addChild(fireball);
                 
                 fireball_cooldown = true;
                 setTimeout(function() {fireball_cooldown = false}, fireball_cooldown_period);
