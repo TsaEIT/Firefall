@@ -39,7 +39,7 @@ var surrounding_shadow = me.GUI_Object.extend(
       // super constructor
       this._super(me.GUI_Object, "init", [x, y, settings]);
       // define the object z order
-      this.pos.z = 1;
+      this.pos.z = 100;
    },
 
    // output something in the console
