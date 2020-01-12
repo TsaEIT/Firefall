@@ -26,7 +26,8 @@ game.PlayerEntity = me.Entity.extend({
         this.renderable.addAnimation("idle",  [0, 1, 2, 3, 4], 200);
         
         if (me.levelDirector.getCurrentLevel().name == "tobecontinued") {
-            console.log('Playing MUSIC')
+            console.log('Playing MUSIC');
+            me.audio.stop("Theme")
             me.audio.play("FinalFight", true);
         }
         
