@@ -125,7 +125,7 @@ game.PlayerEntity = me.Entity.extend({
      * (called when colliding with other objects)
      */
     onCollision : function (response, other) {
-        var dangerous_entities = ["LAVA"];
+        var dangerous_entities = ["LAVA", "PINCERS"];
         var trans_entities = ["FIREBALL"];
         
         if (trans_entities.includes(other.type)) {

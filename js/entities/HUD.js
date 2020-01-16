@@ -13,6 +13,11 @@ game.HUD.Container = me.Container.extend({
 
         // persistent across level change
         this.isPersistent = true;
+        
+        var shadow = new surrounding_shadow(240, 192);
+        
+        this.addChild(shadow);
+        
 
         // make sure we use screen coordinates
         this.floating = true;
@@ -60,4 +65,35 @@ game.HUD.ScoreItem = me.Renderable.extend({
         // draw it baby !
     }
 
+});
+
+var surrounding_shadow = me.GUI_Object.extend(
+{
+   init:function (x, y)
+   {
+      var settings = {}
+      settings.image = "OuterShadow.png";
+      settings.framewidth = 480;
+      settings.frameheight = 384;
+      // super constructor
+      this._super(me.GUI_Object, "init", [x, y, settings]);
+      // define the object z order
+      this.pos.z = 4;
+   },
+   
+   update: function() {
+       if (me.state.isCurrent(me.state.PLAY)) {
+           this.alpha = 1;
+       } else {
+           this.alpha = 0;
+       }
+   },
+
+   // output something in the console
+   // when the object is clicked
+   onClick:function (event)
+   {
+      // this.callback(this.current_HUD);
+      return false;
+   }
 });

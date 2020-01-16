@@ -190,6 +190,11 @@ game.resources = [
         "src": "data/map/level2.tmx"
     },
     {
+        "name": "level22",
+        "type": "tmx",
+        "src": "data/map/level22.tmx"
+    },
+    {
         "name": "tobecontinued",
         "type": "tmx",
         "src": "data/map/tobecontinued.tmx"
