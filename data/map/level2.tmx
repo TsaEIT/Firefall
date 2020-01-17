@@ -78,7 +78,7 @@
   <object id="45" name="me.LevelEntity" x="32" y="288" width="32" height="96">
    <properties>
     <property name="duration" type="int" value="250"/>
-    <property name="to" value="tobecontinued"/>
+    <property name="to" value="hallway"/>
    </properties>
   </object>
   <object id="46" name="elevatorEntity" type="ELEVATOR" x="2624" y="512" width="64" height="32">

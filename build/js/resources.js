@@ -120,16 +120,6 @@ game.resources = [
         "src": "data/img/pincers/pinchers_small.png"
     },
     {
-        "name": "pinchers_small (1)",
-        "type": "image",
-        "src": "data/img/pinchers_small (1).png"
-    },
-    {
-        "name": "pinchers_small",
-        "type": "image",
-        "src": "data/img/pinchers_small.png"
-    },
-    {
         "name": "pinchers",
         "type": "image",
         "src": "data/img/pinchers.png"
@@ -178,6 +168,11 @@ game.resources = [
         "name": "ugly_color",
         "type": "image",
         "src": "data/img/ugly_color.png"
+    },
+    {
+        "name": "hallway",
+        "type": "tmx",
+        "src": "data/map/hallway.tmx"
     },
     {
         "name": "level1",

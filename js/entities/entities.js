@@ -25,13 +25,13 @@ game.PlayerEntity = me.Entity.extend({
         
         this.renderable.addAnimation("idle",  [0, 1, 2, 3, 4], 200);
         
-        if (me.levelDirector.getCurrentLevel().name == "tobecontinued") {
+        if (me.levelDirector.getCurrentLevel().name == "hallway") {
             console.log('Playing MUSIC');
             me.audio.stop("Theme")
             me.audio.play("FinalFight", true);
         }
         
-        var platformer_levels = ['level2'];
+        var platformer_levels = ['level2', 'hallway'];
         
         if (platformer_levels.includes(me.levelDirector.getCurrentLevel().name)) {
             this.body.gravity = {x: 0.0, y: 0.90};
