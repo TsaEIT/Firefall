@@ -144,7 +144,7 @@ game.PlayerEntity = me.Entity.extend({
      * (called when colliding with other objects)
      */
     onCollision : function (response, other) {
-        var dangerous_entities = ["LAVA", "PINCERS"];
+        var dangerous_entities = ["LAVA", "PINCERS", "SPIKE"];
         var trans_entities = ["FIREBALL"];
         
         if (other.type == "ELEVATOR") {
@@ -410,6 +410,55 @@ game.pincersEntity = me.Entity.extend({
             this.body.setCollisionMask(me.collision.types.NO_OBJECT);
             me.game.world.removeChild(this);
       }
+      return false;
+  }
+});
+
+
+game.SpikeEntity = me.Entity.extend({
+  init: function (x, y, settings) {
+    this._super(me.Entity, 'init', [x, y , settings]);
+    
+    this.direction = settings.direction;
+    
+    this.minY = settings.minY;
+    this.maxY = settings.maxY;
+    
+    this.minX = 0;
+    this.maxX = 0;
+        
+    this.movement_speed = 1.5;
+    
+    this.alwaysUpdate = true;
+    
+    this.body.gravity = {x: 0.0, y: 0.0};
+  },
+  
+  
+  update: function(dt) {
+      
+        if (this.direction == "up") {
+            this.body.vel.y = -this.movement_speed;
+            if (this.pos._y < this.minY) {
+                this.direction = "down";
+            }
+        } else {
+            this.body.vel.y = this.movement_speed;
+            if (this.pos._y > this.maxY) {
+                this.direction = "up"
+            }
+        }
+      
+        this.body.update(dt);
+        
+        me.collision.check(this);
+
+        return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
+  },
+
+  // this function is called by the engine, when
+  // an object is touched by something (here collected)
+  onCollision : function (response, other) {
       return false;
   }
 });
