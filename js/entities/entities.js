@@ -108,6 +108,14 @@ game.PlayerEntity = me.Entity.extend({
               this.body.force.y = 0;
         }
         
+        if (this.on_platform) { // this.on_platform may be inaccurate
+            if (this.platform_direction == "left") {
+                this.body.vel.x = -this.platform_speed - this.body.friction.x;
+            } else if (this.platform_direction == "right") {
+                this.body.vel.x = this.platform_speed + this.body.friction.x;
+            }
+        }
+        
         // apply physics to the body (this moves the entity)
         this.body.update(dt);
 
@@ -127,6 +135,19 @@ game.PlayerEntity = me.Entity.extend({
     onCollision : function (response, other) {
         var dangerous_entities = ["LAVA", "PINCERS"];
         var trans_entities = ["FIREBALL"];
+        
+        if (other.type == "ELEVATOR") {
+            if (other.direction == "right") {
+                console.log("On Platform Magic")
+                this.platform_direction = "right";
+                this.platform_speed = other.movement_speed;
+            }
+            if (other.direction == "left") {
+                console.log("On Platform Magic")
+                this.platform_direction = "left";
+                this.platform_speed = other.movement_speed;
+            }
+        }
         
         if (trans_entities.includes(other.type)) {
             return false;
