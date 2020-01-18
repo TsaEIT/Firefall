@@ -17,7 +17,7 @@ game.TitleScreen = me.ScreenObject.extend({
 		this.HUD = new game.HUD.Container();
         me.game.world.addChild(this.HUD);
         
-        me.audio.play("Theme", true);
+        play_audio("Theme");
         
         display_title(this.HUD);
         

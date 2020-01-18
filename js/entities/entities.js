@@ -5,6 +5,7 @@
 var fireball_cooldown = false;
 var fireball_cooldown_period = 500;
 
+
 game.PlayerEntity = me.Entity.extend({
 
     /**
@@ -27,8 +28,6 @@ game.PlayerEntity = me.Entity.extend({
         
         if (me.levelDirector.getCurrentLevel().name == "hallway") {
             console.log('Playing MUSIC');
-            me.audio.stop("Theme")
-            me.audio.play("FinalFight", true);
         }
         
         var platformer_levels = ['level2', 'hallway'];
@@ -39,6 +38,18 @@ game.PlayerEntity = me.Entity.extend({
         } else {
             this.body.gravity = {x: 0.0, y: 0.0};
             this.body.setMaxVelocity(3, 3);
+        }
+        
+        if (me.levelDirector.getCurrentLevel().name == "level1") {
+            play_audio("Maze");
+        }
+        
+        if (me.levelDirector.getCurrentLevel().name == "level2") {
+            play_audio("Platformer");
+        }
+        
+        if (me.levelDirector.getCurrentLevel().name == "hallway") {
+            play_audio("Theme");
         }
         
         this.on_platform = false;

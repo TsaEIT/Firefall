@@ -6,6 +6,8 @@ var game = {
     data : {
         // score
         score : 0,
+        current_audio_name: "",
+        current_audio_id: 0
     },
 
 
@@ -57,3 +59,11 @@ var game = {
         me.state.change(me.state.MENU);
     }
 };
+
+function play_audio(name) {
+    if (game.data.current_audio_id != 0 && game.data.current_audio_name != "") {
+    me.audio.stop(game.data.current_audio_name, game.data.current_audio_id);
+    }
+    game.data.current_audio_name = name;
+    game.data.current_audio_id = me.audio.play(name, true);
+}

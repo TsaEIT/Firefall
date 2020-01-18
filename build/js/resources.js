@@ -1,6 +1,11 @@
 game.resources = [
     {
-        "name": "FinalFight",
+        "name": "Maze",
+        "type": "audio",
+        "src": "data/sfx/"
+    },
+    {
+        "name": "Platformer",
         "type": "audio",
         "src": "data/sfx/"
     },
