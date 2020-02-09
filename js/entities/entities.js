@@ -31,7 +31,7 @@ game.PlayerEntity = me.Entity.extend({
             me.audio.play("FinalFight", true);
         }
         
-        var platformer_levels = ['level2', 'hallway'];
+        var platformer_levels = ['level2', 'hallway', 'boss'];
         
         if (platformer_levels.includes(me.levelDirector.getCurrentLevel().name)) {
             this.body.gravity = {x: 0.0, y: 0.90};
