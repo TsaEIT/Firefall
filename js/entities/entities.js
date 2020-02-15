@@ -5,6 +5,7 @@
 var fireball_cooldown = false;
 var fireball_cooldown_period = 500;
 
+
 game.PlayerEntity = me.Entity.extend({
 
     /**
@@ -27,8 +28,6 @@ game.PlayerEntity = me.Entity.extend({
         
         if (me.levelDirector.getCurrentLevel().name == "hallway") {
             console.log('Playing MUSIC');
-            me.audio.stop("Theme")
-            me.audio.play("FinalFight", true);
         }
         
         var platformer_levels = ['level2', 'hallway', 'boss'];
@@ -39,6 +38,18 @@ game.PlayerEntity = me.Entity.extend({
         } else {
             this.body.gravity = {x: 0.0, y: 0.0};
             this.body.setMaxVelocity(3, 3);
+        }
+        
+        if (me.levelDirector.getCurrentLevel().name == "level1") {
+            play_audio("Maze");
+        }
+        
+        if (me.levelDirector.getCurrentLevel().name == "level2") {
+            play_audio("Platformer");
+        }
+        
+        if (me.levelDirector.getCurrentLevel().name == "hallway") {
+            play_audio("Theme");
         }
         
         this.on_platform = false;
@@ -108,6 +119,14 @@ game.PlayerEntity = me.Entity.extend({
               this.body.force.y = 0;
         }
         
+        if (this.on_platform) { // this.on_platform may be inaccurate
+            if (this.platform_direction == "left") {
+                this.body.vel.x = -this.platform_speed - this.body.friction.x;
+            } else if (this.platform_direction == "right") {
+                this.body.vel.x = this.platform_speed + this.body.friction.x;
+            }
+        }
+        
         // apply physics to the body (this moves the entity)
         this.body.update(dt);
 
@@ -125,8 +144,21 @@ game.PlayerEntity = me.Entity.extend({
      * (called when colliding with other objects)
      */
     onCollision : function (response, other) {
-        var dangerous_entities = ["LAVA", "PINCERS"];
+        var dangerous_entities = ["LAVA", "PINCERS", "SPIKE"];
         var trans_entities = ["FIREBALL"];
+        
+        if (other.type == "ELEVATOR") {
+            if (other.direction == "right") {
+                console.log("On Platform Magic")
+                this.platform_direction = "right";
+                this.platform_speed = other.movement_speed;
+            }
+            if (other.direction == "left") {
+                console.log("On Platform Magic")
+                this.platform_direction = "left";
+                this.platform_speed = other.movement_speed;
+            }
+        }
         
         if (trans_entities.includes(other.type)) {
             return false;
@@ -378,6 +410,55 @@ game.pincersEntity = me.Entity.extend({
             this.body.setCollisionMask(me.collision.types.NO_OBJECT);
             me.game.world.removeChild(this);
       }
+      return false;
+  }
+});
+
+
+game.SpikeEntity = me.Entity.extend({
+  init: function (x, y, settings) {
+    this._super(me.Entity, 'init', [x, y , settings]);
+    
+    this.direction = settings.direction;
+    
+    this.minY = settings.minY;
+    this.maxY = settings.maxY;
+    
+    this.minX = 0;
+    this.maxX = 0;
+        
+    this.movement_speed = 1.5;
+    
+    this.alwaysUpdate = true;
+    
+    this.body.gravity = {x: 0.0, y: 0.0};
+  },
+  
+  
+  update: function(dt) {
+      
+        if (this.direction == "up") {
+            this.body.vel.y = -this.movement_speed;
+            if (this.pos._y < this.minY) {
+                this.direction = "down";
+            }
+        } else {
+            this.body.vel.y = this.movement_speed;
+            if (this.pos._y > this.maxY) {
+                this.direction = "up"
+            }
+        }
+      
+        this.body.update(dt);
+        
+        me.collision.check(this);
+
+        return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
+  },
+
+  // this function is called by the engine, when
+  // an object is touched by something (here collected)
+  onCollision : function (response, other) {
       return false;
   }
 });

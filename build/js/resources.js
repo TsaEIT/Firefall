@@ -1,6 +1,11 @@
 game.resources = [
     {
-        "name": "FinalFight",
+        "name": "Maze",
+        "type": "audio",
+        "src": "data/sfx/"
+    },
+    {
+        "name": "Platformer",
         "type": "audio",
         "src": "data/sfx/"
     },
@@ -85,41 +90,6 @@ game.resources = [
         "src": "data/img/monsters.png"
     },
     {
-        "name": "pinchers_1",
-        "type": "image",
-        "src": "data/img/pincers/pinchers_1.png"
-    },
-    {
-        "name": "pinchers_2",
-        "type": "image",
-        "src": "data/img/pincers/pinchers_2.png"
-    },
-    {
-        "name": "pinchers_3",
-        "type": "image",
-        "src": "data/img/pincers/pinchers_3.png"
-    },
-    {
-        "name": "pinchers_4",
-        "type": "image",
-        "src": "data/img/pincers/pinchers_4.png"
-    },
-    {
-        "name": "pinchers_5",
-        "type": "image",
-        "src": "data/img/pincers/pinchers_5.png"
-    },
-    {
-        "name": "pinchers_6",
-        "type": "image",
-        "src": "data/img/pincers/pinchers_6.png"
-    },
-    {
-        "name": "pinchers_small",
-        "type": "image",
-        "src": "data/img/pincers/pinchers_small.png"
-    },
-    {
         "name": "pinchers",
         "type": "image",
         "src": "data/img/pinchers.png"
@@ -138,6 +108,11 @@ game.resources = [
         "name": "goo",
         "type": "image",
         "src": "data/img/sprites/goo.png"
+    },
+    {
+        "name": "pinchers_small",
+        "type": "image",
+        "src": "data/img/sprites/pinchers_small.png"
     },
     {
         "name": "pixil-frame-0 (12)",
@@ -163,6 +138,11 @@ game.resources = [
         "name": "player",
         "type": "image",
         "src": "data/img/sprites/player.png"
+    },
+    {
+        "name": "spike",
+        "type": "image",
+        "src": "data/img/sprites/spike.png"
     },
     {
         "name": "ugly_color",
