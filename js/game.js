@@ -43,6 +43,7 @@ var game = {
         me.pool.register("skelespider", game.skelespiderEntity);
         me.pool.register("pincers", game.pincersEntity);
         me.pool.register("spikeEntity", game.SpikeEntity);
+        me.pool.register("bossEntity", game.bossEntity);
         
         me.input.bindKey(me.input.KEY.UP,  "up");
         me.input.bindKey(me.input.KEY.DOWN, "down");

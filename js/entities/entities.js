@@ -24,13 +24,13 @@ game.PlayerEntity = me.Entity.extend({
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
         this.alwaysUpdate = true;
         
-        this.renderable.addAnimation("idle",  [0, 1, 2, 3, 4], 200);
+        this.renderable.addAnimation("idle",  [0, 1, 2, 3, 4]);
         
         if (me.levelDirector.getCurrentLevel().name == "hallway") {
             console.log('Playing MUSIC');
         }
         
-        var platformer_levels = ['level2', 'hallway', 'boss'];
+        var platformer_levels = ['level2', 'hallway', 'boss', 'boss1'];
         
         if (platformer_levels.includes(me.levelDirector.getCurrentLevel().name)) {
             this.body.gravity = {x: 0.0, y: 0.90};
@@ -459,6 +459,44 @@ game.SpikeEntity = me.Entity.extend({
   // this function is called by the engine, when
   // an object is touched by something (here collected)
   onCollision : function (response, other) {
+      return false;
+  }
+});
+
+game.bossEntity = me.Entity.extend({
+  // extending the init function is not mandatory
+  // unless you need to add some extra initialization
+  init: function (x, y, settings) {
+    
+    
+    // call the parent constructor
+    this._super(me.Entity, 'init', [x, y , settings]);
+    
+    // set the default horizontal & vertical speed (accel vector)
+    this.body.setVelocity(1, 1);    
+    this.renderable.addAnimation("boss_animation",  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    this.renderable.setCurrentAnimation("boss_animation");
+  },
+  update : function (dt) {
+     
+     // handle collisions against other shapes
+     me.collision.check(this);
+     
+     // return true if we moved or if the renderable was updated
+     return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);     
+  },
+  // this function is called by the engine, when
+  // an object is touched by something (here collected)
+  onCollision : function (response, other) {
+      /*if (response.b.body.collisionType == me.collision.types.WORLD_SHAPE) {
+          return true;
+      }
+      
+      if (other.type == 'FIREBALL') {
+            this.body.setCollisionMask(me.collision.types.NO_OBJECT);
+            me.game.world.removeChild(this);
+      }
+      */
       return false;
   }
 });

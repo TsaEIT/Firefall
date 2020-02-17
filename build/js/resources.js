@@ -65,6 +65,11 @@ game.resources = [
         "src": "data/img/map/BlankBackground.png"
     },
     {
+        "name": "boss_tileset",
+        "type": "image",
+        "src": "data/img/map/boss_tileset.png"
+    },
+    {
         "name": "level1_tilet_img",
         "type": "image",
         "src": "data/img/map/level1_tilet_img.png"
@@ -93,6 +98,11 @@ game.resources = [
         "name": "pinchers",
         "type": "image",
         "src": "data/img/pinchers.png"
+    },
+    {
+        "name": "boss",
+        "type": "image",
+        "src": "data/img/sprites/boss.png"
     },
     {
         "name": "elevator",
@@ -150,6 +160,11 @@ game.resources = [
         "src": "data/img/ugly_color.png"
     },
     {
+        "name": "boss1",
+        "type": "tmx",
+        "src": "data/map/boss1.tmx"
+    },
+    {
         "name": "hallway",
         "type": "tmx",
         "src": "data/map/hallway.tmx"
@@ -168,6 +183,11 @@ game.resources = [
         "name": "tobecontinued",
         "type": "tmx",
         "src": "data/map/tobecontinued.tmx"
+    },
+    {
+        "name": "boss_tileset_thing",
+        "type": "tsx",
+        "src": "data/map/boss_tileset_thing.tsx"
     },
     {
         "name": "level1_tileset",
