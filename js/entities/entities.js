@@ -16,6 +16,11 @@ game.PlayerEntity = me.Entity.extend({
         this._super(me.Entity, 'init', [x, y , settings]);
         this.name = "player";
         
+        if (game.data.passed_check) {
+            this.pos._x = me.game.world.children.find(function (e) {return e.name == 'checkPointEntity'}).pos._x;
+            this.pos._y = me.game.world.children.find(function (e) {return e.name == 'checkPointEntity'}).pos._y;
+        }
+        
         this.current_settings = settings;
         
         this.body.setVelocity(2.5, 2.5);
@@ -190,6 +195,27 @@ game.LavaEntity = me.Entity.extend({
   }
 });
 
+game.checkPointEntity = me.Entity.extend({
+  // extending the init function is not mandatory
+  // unless you need to add some extra initialization
+  init: function (x, y, settings) {
+    // call the parent constructor
+    this._super(me.Entity, 'init', [x, y , settings]);
+    
+    this.renderable.addAnimation("out",  [0]);
+    this.renderable.addAnimation("lit",  [1,2,3,4]);
+    
+    // this.renderable.addAnimation("norm",  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 100);
+    this.renderable.setCurrentAnimation("lit");
+  },
+
+  // this function is called by the engine, when
+  // an object is touched by something (here collected)
+  onCollision : function (response, other) {
+      return false;
+  }
+});
+
 game.ElevatorEntity = me.Entity.extend({
   init: function (x, y, settings) {
     this._super(me.Entity, 'init', [x, y , settings]);
@@ -263,7 +289,7 @@ game.Fireball = me.Entity.extend({
   // unless you need to add some extra initialization
   init: function (x, y, settings) {
     settings = settings || {
-        image: 'fireball',
+        image: 'fireball', // shadow_ball
         height: 17,
         width: 11
     };
@@ -468,6 +494,8 @@ game.bossEntity = me.Entity.extend({
   // unless you need to add some extra initialization
   init: function (x, y, settings) {
     
+    this.shadow_cool = false;
+    this.shadow_cooldown_per = 10;
     
     // call the parent constructor
     this._super(me.Entity, 'init', [x, y , settings]);
@@ -476,8 +504,18 @@ game.bossEntity = me.Entity.extend({
     this.body.setVelocity(1, 1);    
     this.renderable.addAnimation("boss_animation",  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
     this.renderable.setCurrentAnimation("boss_animation");
+    
+    this.alwaysUpdate = true;
+    
+    this.body.gravity = {x: 0.0, y: 0.0};
   },
   update : function (dt) {
+    var summonX = (this.pos.x + (this.current_settings.width/2));
+    var summonY =(this.pos.y + (this.current_settings.height/2));
+    
+    var summon = me.pool.pull('shadowball', summonX, summonY);
+    me.game.world.addChild(summon);
+      
      
      // handle collisions against other shapes
      me.collision.check(this);
@@ -497,6 +535,70 @@ game.bossEntity = me.Entity.extend({
             me.game.world.removeChild(this);
       }
       */
+      return false;
+  }
+});
+
+game.ShadowBall = me.Entity.extend({
+  // extending the init function is not mandatory
+  // unless you need to add some extra initialization
+  init: function (x, y, settings) {
+    console.log('Summon')
+    settings = settings || {
+        image: 'shadow_ball',
+        height: 34, 
+        width: 22
+    };
+    
+    x -= settings.width/2;
+    y -= settings.height/2;
+    
+    // call the parent constructor
+    this._super(me.Entity, 'init', [x, y, settings]);
+    
+    this.renderable.addAnimation("kill_everything",  [0, 1], 50);
+    
+    var player = me.game.world.children.find(function (e) {return e.name == 'player'});
+    
+    this.target = [player.pos._x, player.pos._y];
+    this.velocity = 3;
+    
+    this.dist_to_target = Math.sqrt(((this.target[0] - x) * (this.target[0] - x)) + ((this.target[1] - y) * (this.target[1] - y)));
+    
+    this.deltaX = ((this.target[0] - x) * this.velocity) / this.dist_to_target;
+    this.deltaY = ((this.target[1] - y) * this.velocity) / this.dist_to_target;
+    
+    this.renderable.currentTransform.rotate( ( Math.atan2( this.target[1] - y, this.target[0] - x) ) - Math.PI/2);
+    
+    this.type = "FIREBALL";
+    
+    this.alwaysUpdate = true;
+    
+    this.body.gravity = {x: 0.0, y: 0.0};
+    
+    this.renderable.setCurrentAnimation("kill_everything");
+  },
+  
+  update: function(dt) {
+        // var mainPlayer = me.game.world.children.find(function (e) {return e.name == 'mainPlayer'});
+      
+        this.pos._x += this.deltaX;
+        this.pos._y += this.deltaY;
+      
+        this.body.update(dt);
+        
+        me.collision.check(this);
+
+        return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
+  },
+
+  // this function is called by the engine, when
+  // an object is touched by something (here collected)
+  onCollision : function (response, other) {
+      if (other.name != "bossEntity") {
+          me.game.world.removeChild(this, false);
+      }
+      
       return false;
   }
 });

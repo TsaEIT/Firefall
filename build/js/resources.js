@@ -105,6 +105,11 @@ game.resources = [
         "src": "data/img/sprites/boss.png"
     },
     {
+        "name": "brazier",
+        "type": "image",
+        "src": "data/img/sprites/brazier.png"
+    },
+    {
         "name": "elevator",
         "type": "image",
         "src": "data/img/sprites/elevator.png"
@@ -148,6 +153,11 @@ game.resources = [
         "name": "player",
         "type": "image",
         "src": "data/img/sprites/player.png"
+    },
+    {
+        "name": "shadow_ball",
+        "type": "image",
+        "src": "data/img/sprites/shadow_ball.png"
     },
     {
         "name": "spike",

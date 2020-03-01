@@ -7,9 +7,11 @@ var game = {
         // score
         score : 0,
         current_audio_name: "",
-        current_audio_id: 0
+        current_audio_id: 0,
+        passed_check: false
     },
 
+    
 
     // Run on page load.
     "onload" : function () {
@@ -35,15 +37,19 @@ var game = {
         me.input.registerPointerEvent("pointerdown", this, function(e) {console.log("click")});
 
         // add our player entity in the entity pool
-        me.pool.register("mainPlayer", game.PlayerEntity);
         me.pool.register("lavaEntity", game.LavaEntity);
         me.pool.register("elevatorEntity", game.ElevatorEntity);
         me.pool.register("fireball", game.Fireball);
+        me.pool.register("shadowball", game.ShadowBall);
         
         me.pool.register("skelespider", game.skelespiderEntity);
         me.pool.register("pincers", game.pincersEntity);
         me.pool.register("spikeEntity", game.SpikeEntity);
         me.pool.register("bossEntity", game.bossEntity);
+        
+        me.pool.register("checkPointEntity", game.checkPointEntity);
+        
+        me.pool.register("mainPlayer", game.PlayerEntity);
         
         me.input.bindKey(me.input.KEY.UP,  "up");
         me.input.bindKey(me.input.KEY.DOWN, "down");
