@@ -16,10 +16,7 @@ game.PlayerEntity = me.Entity.extend({
         this._super(me.Entity, 'init', [x, y , settings]);
         this.name = "player";
         
-        if (game.data.passed_check) {
-            this.pos._x = me.game.world.children.find(function (e) {return e.name == 'checkPointEntity'}).pos._x;
-            this.pos._y = me.game.world.children.find(function (e) {return e.name == 'checkPointEntity'}).pos._y;
-        }
+        this.teled_to_check = false;
         
         this.current_settings = settings;
         
@@ -68,6 +65,12 @@ game.PlayerEntity = me.Entity.extend({
      * update the entity
      */
     update : function (dt) {
+        if (game.data.passed_check && this.teled_to_check == false) {
+            this.teled_to_check = true;
+            this.pos._x = me.game.world.children.find(function (e) {return e.name == 'checkPointEntity'}).pos._x;
+            this.pos._y = me.game.world.children.find(function (e) {return e.name == 'checkPointEntity'}).pos._y;
+        }
+        
         var moving = false;
         
         if (me.input.isKeyPressed('fireball')) {
@@ -150,7 +153,7 @@ game.PlayerEntity = me.Entity.extend({
      */
     onCollision : function (response, other) {
         var dangerous_entities = ["LAVA", "PINCERS", "SPIKE"];
-        var trans_entities = ["FIREBALL"];
+        var trans_entities = ["FIREBALL", "CHECKPOINT"];
         
         if (other.type == "ELEVATOR") {
             if (other.direction == "right") {
@@ -205,13 +208,19 @@ game.checkPointEntity = me.Entity.extend({
     this.renderable.addAnimation("out",  [0]);
     this.renderable.addAnimation("lit",  [1,2,3,4]);
     
-    // this.renderable.addAnimation("norm",  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 100);
-    this.renderable.setCurrentAnimation("lit");
+    // this.body.collisionType = me.collision.types.NO_OBJECT;
+    
+    this.renderable.setCurrentAnimation("out");
   },
 
   // this function is called by the engine, when
   // an object is touched by something (here collected)
   onCollision : function (response, other) {
+      if (this.renderable.current.name == "out") {
+          this.renderable.setCurrentAnimation("lit");
+          game.data.passed_check = true;
+          other.teled_to_check = true;
+      }
       return false;
   }
 });

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="87" height="21" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="110">
+<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="87" height="21" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="110">
  <tileset firstgid="1" source="level1_tileset.tsx"/>
  <tileset firstgid="401" source="level2_tileset.tsx"/>
  <tileset firstgid="801" source="level2_background_image.tsx"/>
@@ -94,16 +94,16 @@
    </properties>
   </object>
   <object id="107" name="lavaEntity" type="LAVA" x="0" y="608" width="2784" height="64"/>
+  <object id="109" name="mainPlayer" type="PLAYER" x="1960" y="160" width="32" height="48">
+   <properties>
+    <property name="framewidth" type="int" value="32"/>
+    <property name="image" value="player"/>
+   </properties>
+  </object>
   <object id="108" name="checkPointEntity" type="CHECKPOINT" x="1856" y="64" width="32" height="64">
    <properties>
     <property name="image" value="brazier"/>
     <property name="width" type="int" value="32"/>
-   </properties>
-  </object>
-  <object id="109" name="mainPlayer" x="1960" y="160" width="32" height="48">
-   <properties>
-    <property name="framewidth" type="int" value="32"/>
-    <property name="image" value="player"/>
    </properties>
   </object>
  </objectgroup>
